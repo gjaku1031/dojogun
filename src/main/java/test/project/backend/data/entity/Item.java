@@ -12,17 +12,19 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "orders")
-public class Order {
+@Table(name = "items")
+public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(nullable = false)
+    private String name;
 
-    @OneToMany(mappedBy = "order")
+    @Column(nullable = false)
+    private int price;
+
+    @OneToMany(mappedBy = "item")
     private List<OrderItem> orderItems = new ArrayList<>();
 }

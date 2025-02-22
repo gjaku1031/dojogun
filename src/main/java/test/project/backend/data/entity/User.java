@@ -1,11 +1,12 @@
 package test.project.backend.data.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -14,11 +15,21 @@ import lombok.NoArgsConstructor;
 public class User {
 
     @Id
-    public Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false)
-    public String username;
+    private String username;
 
     @Column(nullable = false)
-    public String password;
+    private String password;
+
+    @Column(nullable = false)
+    private String role;
+
+    @OneToMany(mappedBy = "user") //필드 이름을 쓴다
+    private List<Post> posts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders = new ArrayList<>();
 }
