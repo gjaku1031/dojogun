@@ -25,6 +25,6 @@ public class Item {
     @Column(nullable = false)
     private int price;
 
-    @OneToMany(mappedBy = "item")
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems = new ArrayList<>();
 }

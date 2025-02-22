@@ -27,9 +27,9 @@ public class User {
     @Column(nullable = false)
     private String role;
 
-    @OneToMany(mappedBy = "user") //필드 이름을 쓴다
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)//필드 이름을 쓴다
     private List<Post> posts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
 }
